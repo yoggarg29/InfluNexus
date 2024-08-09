@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>INFLUENCER PROFILE</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    
+    <script>
+      function doPrev(fileCtrl,imgPrev)
+      {
+          let [file] = fileCtrl.files
+          if (file) {
+              imgPrev.src = URL.createObjectURL(file)
+              hdnField.value = file.name;
+          }
+      }
+  </script>
+  <script>
+    $(document).ready(function(){
+      let activeinfl=localStorage.getItem("activeuserinfl");
+      $("#txtemail").val(activeinfl).prop("readonly",true);
+   
+    $("#btnsearch").click(function(){
+      let obj={
+          type:"get",
+          url:"/finduserdetails",
+          data:{
+              txtemail:$("#txtemail").val()
+          }
+      }
+      $.ajax(obj).done(function(jsonAry)
+      {
+          if(jsonAry.length==0)
+          {
+            $("#btnupdate").prop("disabled",true)
+              alert("Create Profile ");
+
+              return;
+          }
+          //alert(JSON.stringify(jsonAry));
+          $("#txtpname").val(jsonAry[0].pname);
+        
+          $("#txtmno").val(jsonAry[0].mno);
+          $("#gender").val(jsonAry[0].gender);
+          $("#dob").val(jsonAry[0].dob);
+          $("#txtadr").val(jsonAry[0].adress);
+          $("#txtcity").val(jsonAry[0].city);
+          $("#state").val(jsonAry[0].state);
+          $("#txtpcode").val(jsonAry[0].pcode);
+          $("#contype").val(jsonAry[0].contype.split(","));
+          $("#txtinsta").val(jsonAry[0].insta);
+          $("#txtutube").val(jsonAry[0].utube);
+          $("#txtx").val(jsonAry[0].x);
+          $("#txtothers").val(jsonAry[0].other);
+          $("#prev").prop("src", "uploads/" + jsonAry[0].prpicpath);
+           $("#hdn").val(jsonAry[0].prpicpath);
+           $("#profileType").val("existing");
+           $("#prpic").removeAttr("required");
+
+      }).fail(function(err)
+      {
+          alert(err.statusText);
+      })
+
+  }); })
+  </script>
+   
+</head>
+<body>  <nav style="box-shadow: 0px 0px 1px 0px black;" class="navbar  navbar-expand-lg">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">
+      <img src="pics/logo3.jpg" alt="Bootstrap" style="border-radius: 0%;" width="70" height="60">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <font style="font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; font-size:25px;font-weight:bolder">InfluNexus</font>
+    </a>
+  </div>
+</nav><br>
+    <div>
+        <center>
+            <h2>
+                MY PROFILE 
+            </h2>
+        </center><br>
+    </div>
+    <div class="container">
+    <form  method="post" enctype="multipart/form-data" class="row g-3">
+      <input type="hidden" name="hdn" id="hdn">
+      <input type="hidden" id="profileType" name="profileType" value="new">
+
+        <div class="col-md-6">
+          <input type="email"  placeholder="Enter Email"  class="form-control" name="txtemail" id="txtemail"> 
+          <br>
+          <div class="col-md-12">
+            <input  type="text" required class="form-control " placeholder="Enter Name" id="txtpname" name="txtpname">
+          </div> <br>
+       
+        </div>
+        <div class="col-md-2"> 
+          <center>  <button type="button" id="btnsearch" name="btnseach" class="btn btn-dark">Search</button></center>
+        </div> 
+        <div class="col-md-4" style="height: 200px" >
+            
+            
+                <h6 >Profile Pic</h6>
+             
+               <h6>  <input   type="file" name="prpic" id="prpic" onchange="doPrev(this,prev);"> </h6>
+               <img src="" class="img-fluid" id="prev" alt="..." height="100px" width="100px">
+            
+
+        </div>
+       
+          
+          <div class="col-md-4">
+            <label for="txtmno" class="form-label">Phone Number</label>
+            <input type="text " required placeholder=" Enter Phone Number" class="form-control" id="txtmno" name="txtmno">
+          </div>
+
+          <div class="col-md-4">
+            <label for="gender" class="form-label">Gender</label>
+            <select required id="gender" name="gender" class="form-select">
+             
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+              <option value="Others">Others</option>
+              
+              
+
+            </select>
+          </div>
+          <div class="col-md-4">
+            <label  for="dob" class="form-label">Date Of Birth</label>
+            <input required type="date" class="form-control" name="dob" id="dob">
+          </div>
+        <div class="col-12"> 
+          <label for="txtadr" class="form-label">Address</label>
+          <input required type="text" class="form-control" id="txtadr" name="txtadr" placeholder="Enter Your Adress">
+        </div>
+       
+        <div class="col-md-6">
+          <label for="txtcity" class="form-label">City</label>
+          <input required type="text" class="form-control" name="txtcity" id="txtcity">
+        </div>
+        <div class="col-md-4">
+          <label for="state"  class="form-label">State</label>
+          <select required id="state" name="state" class="form-select">
+           
+            <option value="punjab">Punjab</option>
+            <option value="mumbai">Mumbai</option>
+            <option value="delhi">Delhi</option>
+            
+          </select>
+        </div>
+        <div class="col-md-2">
+          <label for="txtpcode" class="form-label">Pin Code</label>
+          <input required type="text" class="form-control" id="txtpcode" name="txtpcode"> 
+        </div>
+        <div class="col-md-3">
+            
+                <label for="contype" class="form-label">Content-Type</label>
+                <select required size="6" multiple id="contype" name="contype" class="form-select">
+                 
+                  <option value="Fashion">Fashion</option>
+                  <option value="Fitness">Fitness</option>
+                  <option value="Health and Wellness ">Health and Wellness </option>
+                  <option value="Food & Nutrition">Food & Nutrition</option>
+                  <option value="Travel">Travel</option>
+                  <option value="Business & Finance">Business & Finance</option>
+                  <option value="Family">Family</option>
+                  <option value="Sports">Sports</option>
+                  <option value="Gaming">Gaming</option>
+                  <option value="Animal">Animal</option>
+                  <option value="Beauty">Beauty</option>
+                  <option value="Technology">Technology</option>
+                  <option value="Coding">Coding</option>
+                  <option value="Education">Education</option>
+                  <option value="Photography">Photography</option>
+                  <option value="Others">Others</option>
+                  
+                  
+    
+                </select>
+              
+
+ 
+        </div>
+        <div class="col-md-9">
+            <div class="row">
+            <div class="col-md-4" >
+                <label for="txtinsta" class="form-label">Instagram Account</label>
+                <input required type="text" class="form-control" placeholder=" Enter your instagarm username" name="txtinsta" id="txtinsta" txtinsta>
+              </div>
+              <div class="col-md-4">
+                <label for="txtutube" class="form-label">Youtube Channel</label>
+                <input required type="text" class="form-control" placeholder="Enter name of youtube channel"  id="txtutube" name="txtutube">
+              </div> 
+              <div class="col-md-4" >
+                <label for="txtx" class="form-label">Twitter Account</label>
+                <input required type="text" class="form-control" placeholder=" Enter your twitter username" id="txtx" name="txtx">
+              </div>
+        </div>
+        <div class="col-md-12">
+            <label for="txtothers" class="form-label">Other Details(if any)</label> <br>
+           <textarea  class="form-control" placeholder="enter any other details" rows="3" cols="128" id="txtothers" name="txtothers"></textarea>        </div>
+    </div>
+       <center>
+        <div >
+          <button type="submit" id="btnsubmit" class="btn btn-primary" formaction="profilesave">Save</button>
+            <button type="submit" id="btnupdate" class="btn btn-danger" formaction="profileupdate">Update</button>
+          </div></center> <br>
+      </form> <br><br>
+    </div>
+    
+</body>
+</html>

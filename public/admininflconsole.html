@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Influencer Console</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.3/angular.min.js"></script>
+<script>
+    var module=angular.module("mymodule",[]);
+    var controller=module.controller("mycontroller",function($scope,$http){
+        $scope.showallinfl = function () {
+            
+            let url = "/fetchallinfl";
+            $http.get(url).then(success, fail);
+            function success(response) {
+                $scope.jsonarrayall = response.data;
+            }
+            function fail(err) {
+                alert(err.data)
+            }
+
+        }
+
+    })
+</script>
+</head>
+<body ng-app="mymodule" ng-controller="mycontroller">
+    <center>
+   
+        <p>
+           
+                <h1 style="color: red;">Influencer Console</h1>
+                  </p>
+            <h4>
+
+                <button type="button" ng-click="showallinfl();" class="btn btn-dark">Fetch All Influencer</button>
+
+            </h4> </center> <br><br>
+          
+            <div class="container d-flex justify-content-center align-items-center" >
+                <table style="background-color: lightblue;" width="900"  border="1" class="table">
+                    <tr >
+                        <th style="color: darkblue;background-color:lightskyblue;text-align:center">Sr.No.</th>
+                        <th style="color: darkblue;background-color:lightskyblue;text-align:center">Email id</th>
+                        <th style="color: darkblue;background-color:lightskyblue;text-align:center"> Name</th>
+                        <th style="color: darkblue;background-color:lightskyblue;text-align:center">Profile Picture</th>
+                        <th style="color: darkblue;background-color:lightskyblue;text-align:center">Contact No.</th>
+                        <th style="color: darkblue;background-color:lightskyblue;text-align:center">Gender</th>
+                        <th style="color: darkblue;background-color:lightskyblue;text-align:center">DOB</th>
+                        <th style="color: darkblue;background-color:lightskyblue;text-align:center">Adress</th>
+                        <th style="color: darkblue;background-color:lightskyblue;text-align:center">City</th>
+                        <th style="color: darkblue;background-color:lightskyblue;text-align:center">State</th>
+                        <th style="color: darkblue;background-color:lightskyblue;text-align:center">Pin code</th>
+                        <th style="color: darkblue;background-color:lightskyblue;text-align:center">Content type</th>
+                        <th style="color: darkblue;background-color:lightskyblue;text-align:center">Instagram Username</th>
+                        <th style="color: darkblue;background-color:lightskyblue;text-align:center">Youtube Channel</th>
+                        <th style="color: darkblue;background-color:lightskyblue;text-align:center">Twitter Channel</th>
+                        <th style="color: darkblue; background-color:lightskyblue;text-align:center">Other Details</th>
+                    </tr>
+                    <tr ng-repeat="obj in jsonarrayall">
+                        <td  style="color:darkblue;background-color: bisque">
+                            {{$index+1}}</td>
+                        <td style="background-color: bisque;">
+                            {{obj.email}}
+                        </td>
+                        <td style="background-color: bisque;">
+                            {{obj.pname}}
+                        </td >
+                        <td style="background-color: bisque;">
+                          
+                             <img src="uploads/{{obj.prpicpath}}" width="70" height="70" alt="">
+                        </td><td style="background-color: bisque;">
+                            {{obj.mno}}
+                        </td><td style="background-color: bisque;">
+                            {{obj.gender}}
+                        </td><td style="background-color: bisque;">
+                            {{obj.dob}}
+                        </td><td style="background-color: bisque;">
+                            {{obj.adress}}
+                        </td><td style="background-color: bisque;">
+                            {{obj.city}}
+                        </td><td style="background-color: bisque;">
+                            {{obj.state}}
+                        </td><td style="background-color: bisque;">
+                            {{obj.pcode}}
+                        </td><td style="background-color: bisque;">
+                            {{obj.contype}}
+                        </td><td style="background-color: bisque;">
+                            {{obj.insta}}
+                        </td><td style="background-color: bisque;">
+                            {{obj.utube}}
+                        </td><td style="background-color: bisque;"> 
+                            {{obj.x}}
+                        </td><td style="background-color: bisque;">
+                            {{obj.other}}
+                        </td>
+                       
+                    </tr>
+                </table>
+            </div>
+</body>
+</html>

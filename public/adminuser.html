@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> User Manager</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.3/angular.min.js"></script>
+    <script>
+        var module = angular.module("mymodule", []);
+
+        var controller = module.controller("mycontroller", function ($scope, $http) {
+            $scope.jsonarrayall = [];
+            $scope.showall = function () {
+                //  alert("Hi")
+                let url = "/fetchall";
+                $http.get(url).then(success, fail);
+                function success(response) {
+                    $scope.jsonarrayall = response.data;
+                }
+                function fail(err) {
+                    alert(err.data)
+                }
+
+            }
+            $scope.deleteone = function (email) {
+                let url = "/deleteone?email=" + email;
+                $http.get(url).then(success, fail);
+
+                function success(response) {
+                    
+                    $scope.showall();
+
+                }
+                function fail(err) {
+                    alert(err.data)
+                }
+            }
+
+            $scope.block = function (email,status) {
+                let url = "/block?email=" + email;
+                $http.get(url).then(success, fail);
+
+                function success(response) {
+                   
+                    $scope.showall();
+
+                }
+                function fail(err) {
+                    alert(err.data)
+                }
+            }
+            $scope.unblock = function (email,status) {
+                let url = "/unblock?email=" + email;
+                $http.get(url).then(success, fail);
+
+                function success(response) {
+                   
+                    $scope.showall();
+
+                }
+                function fail(err) {
+                    alert(err.data)
+                }
+            }
+        }
+        )
+    </script>
+</head>
+
+<body ng-app="mymodule" ng-controller="mycontroller"><br>
+    <center>
+        <p>
+            <center>
+                <h1 style="color: red;">User Manager</h1>
+            </center>
+        </p>
+        <h4>
+
+            <button type="button" ng-click="showall();" class="btn btn-dark">Fetch All Users</button>
+        </h4> <br><br>
+        <div class="container">
+            <table width="450" border="1" class="table">
+                <tr >
+                    <th style="color: darkblue;">Sr.No.</th>
+                    <th style="color: darkblue;">Email Id</th>
+                    <th style="color: darkblue;">User Type</th>
+                    <th style="color: darkblue;">Status</th>
+                    <th style="color: darkblue;">Delete</th>
+                    <th style="color: darkblue;">Block/Unblock</th>
+                </tr>
+                <tr ng-repeat="obj in jsonarrayall">
+                    <td  style="color:darkblue;">{{$index+1}}</td>
+                    <td>
+                        {{obj.email}}
+                    </td>
+                    <td>
+                        {{obj.utype}}
+                    </td>
+                    <td>
+                        {{obj.status}}
+                    </td>
+                    <td>
+                        <button type="button" ng-click="deleteone(obj.email);" class="btn btn-secondary">Delete</button>
+                    </td>
+                    <td>
+
+                        <button type="button" ng-click="block(obj.email,obj.status);" class="btn btn-danger">Block</button>
+                        &nbsp; &nbsp; &nbsp;
+                        <button type="button" ng-click="unblock(obj.email,obj.status);" class="btn btn-success">Resume</button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </center>
+</body>
+
+</html>
