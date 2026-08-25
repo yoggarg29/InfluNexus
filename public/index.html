@@ -4,479 +4,331 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Index</title>
+  <title>InfluNexus — Where Influencers Meet Brands</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-    crossorigin="anonymous"></script>
-  <script src="https://code.jquery.com/jquery-3.7.1.min.js"
-    integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
-  <script>
-    $(document).ready(function () {
-      function validateEmail(email) {
-        var emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-        return emailPattern.test(email);
-    }
-
-    function validatePassword(password) {
-        
-        return password.length >= 6;
-    }
-
-  $("#txtemail").on("input", function () {
-    let email = $(this).val();
-    if (!validateEmail(email)) {
-      $("#msgsignupemail").html("Invalid email address").css("color", "red");
-    } else {
-      $("#msgsignupemail").html("");
-    }
-  });
-
-  $("#txtpwd").on("input", function () {
-    let password = $(this).val();
-    if (!validatePassword(password)) {
-      $("#msgsignuppwd").html("Password must be at least 6 characters long").css("color", "red");
-    } else {
-      $("#msgsignuppwd").html("");
-    }
-  });
-
-  $("#utype").on("change", function () {
-    let utypee = $(this).val();
-    if (utypee === "none") {
-      $("#msgsignupcontype").html("  Select a role").css("color", "red");
-    } else {
-      $("#msgsignupcontype").html("");
-    }
-  });
-      $("#sgnup").click(function () {
-        let email = $("#txtemail").val();
-        let password = $("#txtpwd").val();
-        let utypee = $("#utype").val();
-        
-
-       
-        
-        let obj = {
-          type: "get",
-          url: "/signup",
-          data: {
-            txtemail: $("#txtemail").val(),
-            txtpwd: $("#txtpwd").val(),
-            utypee: $("#utype").val()
-
-          }
-        }
-        $.ajax(obj).done(function (resp) {
-         
-        alert(resp);
-
-
-
-
-        }).fail(function (err) {
-          alert(err.statusText);
-        })
-
-      })
-      
-  
-      $("#login").click(function () {
-        let email = $("#txtemaill").val();
-        let password = $("#txtpwdd").val();
-        
-        let obj = {
-          type: "get",
-          url: "/login",
-          data: {
-            txtemaill: $("#txtemaill").val(),
-            txtpwdd: $("#txtpwdd").val()
-
-          }
-        }
-        $.ajax(obj).done(function (resp) {
-        
-          $("#msglogin").html(resp).css("color","red");
-          if (resp === "INFLUENCER") {
-            location.href = "infldash.html"
-            localStorage.setItem("activeuserinfl", $("#txtemaill").val());
-          }
-          else if (resp === "INFLUENCER") {
-            location.href = "branddash.html"
-            localStorage.setItem("activeuserbrand", $("#txtemaill").val());
-          }
-          else {
-         //   alert(resp);
-          }
-
-
-
-
-
-        }).fail(function (err) {
-          alert(err.statusText);
-        })
-
-      })
-
-    })
-
-  </script>
-  <style>
-    .removeunderline {
-      text-decoration: none;
-    }
-
-    .hov {
-      color: black;
-    }
-
-    .hov:hover {
-      color: red;
-
-    }
-
-    .hovv:hover {
-      background-color: darkcyan;
-      border-color: darkcyan;
-
-    }
-
-    .hovvv:hover {
-      color: red;
-
-    }
-
-    .hovvvv:hover {
-      color: darkcyan;
-    }
-
-    .cr {
-      color: white;
-      background-color: rgb(39, 95, 167);
-    }
-
-    #icon {
-      padding: 7px;
-      background-color: black;
-      color: white;
-      position: fixed;
-      bottom: 10px;
-      right: 50px;
-      text-align: center;
-      height: 37px;
-
-    }
-
-    .map-responsive {
-      overflow: hidden;
-      padding-bottom: 56.25%;
-      position: relative;
-      height: 0;
-    }
-
-    .map-responsive iframe {
-      left: 0;
-      top: 0;
-      height: 100%;
-      width: 100%;
-      position: absolute;
-    }
-  </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
-  <a href="#">
-    <div id="icon"> <i class="fa-solid fa-angle-up"></i> </div>
+  <a href="#top" class="back-to-top" aria-label="Back to top">
+    <i class="fa-solid fa-angle-up"></i>
   </a>
-  <nav style="box-shadow: 0px 0px 1px 0px black;" class="navbar  navbar-expand-lg ">
-    <div class="container-fluid">
-      <nav class="navbar ">
-        <div class="container">
-          <a class="navbar-brand" href="#">
-            <img src="pics/logo3.jpg" alt="Bootstrap" style="border-radius: 0%;" width="70" height="60">
-          </a>
-        </div>
-      </nav>
-      <a class="navbar-brand" href="#">
-        <font
-          style="font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; font-size:25px;font-weight:bolder">
-          InfluNexus</font>
+
+  <nav class="navbar navbar-expand-lg" id="top">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center gap-2" href="#top">
+        <img src="pics/logo3.jpg" alt="InfluNexus logo" width="42" height="42" style="object-fit:cover;">
+        <span class="navbar-brand-text">InfluNexus</span>
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link hov" href="#ourservices" font
-              style="font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; font-size:20px;font-weight:bolder">Our
-              Services</a>
-          </li> &nbsp;&nbsp;&nbsp;&nbsp
-          <li class="nav-item">
-            <a class="nav-link hov"
-              style="font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; font-size:20px;font-weight:bolder"
-              href="#ourteam">Our Team</a>
-          </li> &nbsp;&nbsp;&nbsp;&nbsp;
-          <li class="nav-item">
-            <a class="nav-link hov"
-              style="font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; font-size:20px;font-weight:bolder"
-              href="#reachus">Reach us</a>
-          </li>&nbsp;&nbsp;&nbsp;&nbsp;
-          <li class="nav-item">
-            <a class="nav-link  hov"
-              style="font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; font-size:20px;font-weight:bolder"
-              href="#contactus">Contact us</a>
-          </li>
-
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
-
+        <ul class="navbar-nav me-auto ms-lg-4">
+          <li class="nav-item"><a class="nav-link brand-link" href="#ourservices">Services</a></li>
+          <li class="nav-item"><a class="nav-link brand-link" href="#reachus">Reach us</a></li>
+          <li class="nav-item"><a class="nav-link brand-link" href="#contactus">Contact</a></li>
         </ul>
-        <form class="d-flex" role="search">
-
-          <button data-bs-toggle="modal" data-bs-target="#signupModal" class="btn btn-dark hovv"
-            style="font-size: 18px;" type="button">Sign up</button> &nbsp;&nbsp;&nbsp;
-          <button data-bs-toggle="modal" data-bs-target="#loginModal" class="btn btn-dark hovv" style="font-size: 18px;"
-            type="button">Login</button>
+        <form class="d-flex gap-2" role="search">
+          <button data-bs-toggle="modal" data-bs-target="#signupModal" class="btn btn-outline-light" type="button">Sign
+            up</button>
+          <button data-bs-toggle="modal" data-bs-target="#loginModal" class="btn btn-light" type="button">Login</button>
         </form>
       </div>
     </div>
   </nav>
-  <br>
 
-  <div>
-    <div>
-      <!-- <div class="carousel-item active"  data-bs-interval="100">
-            <img src="pics/cr4.webp"  class="d-block w-100" alt="...">
-          </div> -->
-      <div>
-        <img src="pics/cr1.jpg" class="d-block w-100" alt="...">
-      </div>
-      <!-- <div class="carousel-item">
-            <img src="pics/cr3.webp"  class="d-block w-100" alt="...">
-          </div> -->
-    </div>
-  </div>
-  <br>
-  <center>
-    <p id="ourservices" style="cursor: pointer;" class="fs-2 fw-bold hovvv"> <a href="#ourservices"
-        class="nav-link ">Our Services</a></p>
-  </center>
-  <div class="container">
-    <div class="row">
-      <div class="col-md-3">
-
-        <div class="card mt-5 md-5">
-          <img src="pics/ca1.avif" height="200" width="100" class="card-img-top" alt="...">
-          <div class="card-body">
-            <center>
-              <h5 class="card-title" style="color: red; font-weight:bolder">Collabrations</h5>
-              <p style="color:darkcyan;" class="card-text fw-semibold ">Facilitate impactful partnerships between
-                Influencer and Brand . Discover their joint projects and collaborations here!.</p>
-            </center>
+  <!-- Hero -->
+  <header class="hero">
+    <div class="hero-split"></div>
+    <div class="container position-relative">
+      <div class="row align-items-center g-5">
+        <div class="col-lg-6">
+          <div class="eyebrow mb-3" style="color:rgba(255,255,255,0.55)">The creator × brand marketplace</div>
+          <h1 class="mb-3">Two sides.<br>One nexus.</h1>
+          <p class="lede mb-4">
+            InfluNexus is where influencers build a public profile and post what they're
+            available for, and where brands search, discover, and reach out —
+            without the back-and-forth DMs.
+          </p>
+          <div class="d-flex gap-3">
+            <button data-bs-toggle="modal" data-bs-target="#signupModal" class="btn btn-light btn-lg" type="button">Get
+              started</button>
+            <a href="#ourservices" class="btn btn-outline-light btn-lg">See how it works</a>
           </div>
         </div>
-      </div>
-      <div class="col-md-3">
-
-        <div class="card mt-5 md-5">
-          <img src="pics/ca222.jpg" height="200" class="card-img-top" alt="...">
-          <div class="card-body">
-            <center>
-              <h5 class="card-title" style="color:darkcyan; font-weight:bolder">Search Influencer</h5>
-              <p style="color:red;" class="card-text fw-semibold ">Find influencers who align perfectly with your
-                brand's values and goals. Collaborate on impactful projects that resonate with your audience.</p>
-            </center>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-3">
-
-        <div class="card mt-5 md-5">
-          <img src="pics/ca3.avif" height="200" class="card-img-top" alt="...">
-          <div class="card-body">
-            <center>
-              <h5 class="card-title" style="color:red; font-weight:bolder">Meet & Greet</h5>
-              <p style="color:darkcyan;" class="card-text fw-semibold ">Engage in personalized meet-ups and
-                collaborations between influencers and brand. Build lasting relationships.</p>
-            </center>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-3">
-
-        <div class="card mt-5 md-5">
-          <img src="pics/ca4.avif" height="200" class="card-img-top" alt="...">
-          <div class="card-body">
-            <center>
-              <h5 class="card-title" style="color:darkcyan; font-weight:bolder">Post Events</h5>
-              <p style="color:red;" class="card-text fw-semibold ">Share upcoming events organized by influencers.
-                Brands can discover and participate in these events to engage with their audience..</p>
-            </center>
-
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-
-  <br>
-  <center>
-    <p id="ourteam" style="cursor: pointer;" class="fs-2 fw-bold hovvvv"><a class="nav-link " href="#ourteam">Our
-        Team</a></p>
-  </center>
-  <div class="container">
-    <div class="row justify-content-center">
-      <div class="col-md-10 offset-md-1">
-
-        <div class="row">
-          <div class="col-md-5">
-
-            <div class="card mt-5 md-5">
-              <img src="pics/te1.jpg" class="card-img-top" alt="...">
-              <div class="card-body">
-                <center>
-                  <h5 style="color:red; font-weight:bolder" class="card-title"> Under the Guidance </h5>
-                  <p style="color:darkcyan; font-weight:bolder" class="card-text fw-semibold "> RAJESH BANSAL <br>Author
-                    of REAL JAVA </p>
-                </center>
+        <div class="col-lg-6">
+          <div class="row g-3">
+            <div class="col-6">
+              <div class="hero-side-card hero-side-card--influencer h-100">
+                <div class="eyebrow mb-2">For Influencers</div>
+                <p class="mb-0" style="color:rgba(255,255,255,0.85); font-size:0.95rem;">Build a profile, list your
+                  content niche, and post events brands can book you for.</p>
               </div>
             </div>
-          </div>
-          <div class="col-md-5">
-
-            <div class="card mt-5 md-5">
-              <img src="pics/te2.jpg" class="card-img-top" alt="...">
-              <div class="card-body">
-                <center>
-                  <h5 style="color:red; font-weight:bolder" class="card-title"> YOG GARG</h5>
-                  <p style="color:darkcyan; font-weight:bolder" class="card-text fw-semibold ">YOG GARG <br> Undergrad
-                    at NIT J </p>
-                </center>
+            <div class="col-6">
+              <div class="hero-side-card hero-side-card--brand h-100">
+                <div class="eyebrow mb-2">For Brands</div>
+                <p class="mb-0" style="color:rgba(255,255,255,0.85); font-size:0.95rem;">Filter by niche and city to
+                  find creators who actually fit your campaign.</p>
               </div>
+            </div>
+            <div class="col-12">
+              <svg viewBox="0 0 400 120" class="w-100" role="img" aria-label="Influencers and brands connecting through InfluNexus">
+                <line x1="55" y1="30" x2="200" y2="60" stroke="rgba(255,93,115,0.55)" stroke-width="2"/>
+                <line x1="55" y1="90" x2="200" y2="60" stroke="rgba(255,93,115,0.55)" stroke-width="2"/>
+                <line x1="345" y1="30" x2="200" y2="60" stroke="rgba(90,86,255,0.55)" stroke-width="2"/>
+                <line x1="345" y1="90" x2="200" y2="60" stroke="rgba(90,86,255,0.55)" stroke-width="2"/>
+                <circle cx="55" cy="30" r="7" fill="#ff5d73"/>
+                <circle cx="55" cy="90" r="7" fill="#ff5d73"/>
+                <circle cx="345" cy="30" r="7" fill="#5a56ff"/>
+                <circle cx="345" cy="90" r="7" fill="#5a56ff"/>
+                <circle cx="200" cy="60" r="13" fill="#fff"/>
+                <circle cx="200" cy="60" r="13" fill="none" stroke="#fff" stroke-width="1.5" opacity="0.5"/>
+              </svg>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div> <br>
-  <center>
-    <p id="reachus" style="cursor: pointer;" class="fs-2 fw-bold hovvv"> <a href="#reachus" class="nav-link ">Reach
-        Us</a></p>
-  </center>
-  <div class="container">
-    <div class="map-responsive">
-      <iframe
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3405.6621069122284!2d75.53326361110523!3d31.3958791531749!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x391a51d30c180edf%3A0x5b7633718d17ef33!2sDr%20B%20R%20Ambedkar%20National%20Institute%20of%20Technology%20Jalandhar!5e0!3m2!1sen!2sin!4v1721326033118!5m2!1sen!2sin"
-        width="70%" height="30vh" style="border:0;" allowfullscreen="" loading="lazy"
-        referrerpolicy="no-referrer-when-downgrade"></iframe>
-    </div> <br>
-    <center>
-      <p id="contactus" style="cursor: pointer;" class="fs-2 fw-bold hovvvv"> <a href="#contactus"
-          class="nav-link ">Contact Us</a></p>
-    </center>
-    <div>
-      <center> contact</center>
+  </header>
 
-    </div> <br>
-    <div>
-      <center>
-        <p class=" fs-4 fw-medium  cr ">
-
-          Copyright 2024 © InfluNexus All Rights Reserved, Developed By <font style="color:yellow"> Yog Garg</font>
-        </p>
-      </center>
-    </div>
-    <!-- Modal signup -->
-    <div class="modal fade" id="signupModal" tabindex="-1" aria-labelledby="signupModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h1 class="modal-title fs-5" id="signupModalLabel">Sign Up
-             
-            </h1>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+  <!-- Services -->
+  <section id="ourservices" class="section">
+    <div class="container">
+      <div class="text-center">
+        <div class="eyebrow justify-content-center d-flex mb-2">How it works</div>
+        <h2 class="section-heading">Built for both sides of the deal</h2>
+        <p class="section-sub">Everything an influencer needs to be found, and everything a brand needs to find them.</p>
+      </div>
+      <div class="row g-4">
+        <div class="col-md-3">
+          <div class="card h-100">
+            <div class="card-body p-4">
+              <div class="icon-badge icon-badge--influencer"><i class="fa-solid fa-id-badge"></i></div>
+              <h5 class="card-title">Build a Creator Profile</h5>
+              <p class="card-text">Influencers list their niche, socials, and city once — no repeating the same
+                pitch in every DM.</p>
+            </div>
           </div>
-          <div class="modal-body">
-            <form>
-              <div class="mb-3">
-                <label for="txtemail" class="form-label">Email address</label> <span id="msgsignupemail">*</span>
-                <input type="email" class="form-control" id="txtemail" name="txtemail" aria-describedby="emailHelp">
-
-              </div>
-              <div class="mb-3">
-                <label for="txtpwd" class="form-label">Password</label>
-                <span id="msgsignuppwd">*</span>
-                <input type="password" class="form-control" id="txtpwd" name="txtpwd">
-              </div>
-              <div> <label for="utype" class="form-label">Select your Role</label><span id="msgsignupcontype">*</span>
-                <select class="form-select" name="utype" id="utype" aria-label="Default select example">
-                  <option value="none" selected>SELECT YOUR ROLE</option>
-                  <option value="INFLUENCER">INFLUENCER</option>
-                  <option value="BRAND">BRAND</option>
-
-                </select>
-              </div>
-              <center> <br>
-                <div> <button type="button" id="sgnup" class="btn btn-primary">SIGN UP</button></div>
-              </center>
-            </form>
+        </div>
+        <div class="col-md-3">
+          <div class="card h-100">
+            <div class="card-body p-4">
+              <div class="icon-badge icon-badge--brand"><i class="fa-solid fa-magnifying-glass"></i></div>
+              <h5 class="card-title">Filtered Search</h5>
+              <p class="card-text">Brands filter by content type, city, or name to shortlist creators in seconds,
+                not scrolling.</p>
+            </div>
           </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-
+        </div>
+        <div class="col-md-3">
+          <div class="card h-100">
+            <div class="card-body p-4">
+              <div class="icon-badge icon-badge--influencer"><i class="fa-solid fa-calendar-check"></i></div>
+              <h5 class="card-title">Post &amp; Manage Bookings</h5>
+              <p class="card-text">Influencers list events they're open for — a date, time, and place brands can
+                act on directly.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="card h-100">
+            <div class="card-body p-4">
+              <div class="icon-badge icon-badge--brand"><i class="fa-solid fa-shield-halved"></i></div>
+              <h5 class="card-title">Moderated Platform</h5>
+              <p class="card-text">Every account runs through an admin console, so bad actors can be reviewed and
+                blocked, not just reported.</p>
+            </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h1 class="modal-title fs-5" id="loginModalLabel">Login
-              <span id="msglogin">*</span>
+  </section>
 
-            </h1>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            <form>
-              <div class="mb-3">
-                <label for="txtemaill" class="form-label">Email address</label>
-                <input type="email" name="txtemaill" class="form-control" id="txtemaill" aria-describedby="emailHelp">
+  <!-- Contact -->
+  <section id="reachus" class="section">
+    <div class="container">
+      <div class="text-center">
+        <div class="eyebrow justify-content-center d-flex mb-2">Find us</div>
+        <h2 class="section-heading">Reach Us</h2>
+        <p class="section-sub">Drop by, or reach out below.</p>
+      </div>
+      <div class="map-responsive">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3405.6621069122284!2d75.53326361110523!3d31.3958791531749!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x391a51d30c180edf%3A0x5b7633718d17ef33!2sDr%20B%20R%20Ambedkar%20National%20Institute%20of%20Technology%20Jalandhar!5e0!3m2!1sen!2sin!4v1721326033118!5m2!1sen!2sin"
+          allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+          title="InfluNexus location"></iframe>
+      </div>
+    </div>
+  </section>
 
-              </div>
-              <div class="mb-3">
-                <label for="txtpwdd" class="form-label">Password</label>
-                <input type="password" class="form-control" id="txtpwdd" name="txtpwdd">
-              </div>
-              <center> <br>
-                <div> <button style="font-size: 15px;" type="button" id="login" class="btn btn-dark">Login </button>
-                  <br> <br> &nbsp;&nbsp;
-                  <a style="font-size: 20px;" class="removeunderline" href="">
-                    Forgetten Password</a>
-                </div> <br>
-                <h5>
-                  Or if you don't have account <a href="/" style="font-size: 20px;" class="removeunderline">Sign up </a>
-                  here
-                </h5>
-              </center> <br>
-            </form>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+  <footer class="site-footer" id="contactus">
+    <div class="container d-flex flex-wrap justify-content-between align-items-center gap-2">
+      <div><strong>InfluNexus</strong> &nbsp;·&nbsp; Copyright 2024. All Rights Reserved.</div>
+      <div>Developed by <strong>Yog Garg</strong></div>
+    </div>
+  </footer>
 
+  <!-- Sign-up modal -->
+  <div class="modal fade" id="signupModal" tabindex="-1" aria-labelledby="signupModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <div>
+            <div class="role-tag mb-1">Create account</div>
+            <h1 class="modal-title fs-5" id="signupModalLabel">Sign Up</h1>
           </div>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div id="signupAlert"></div>
+          <form>
+            <div class="mb-3">
+              <label for="txtemail" class="form-label">Email address</label>
+              <input type="email" class="form-control" id="txtemail" name="txtemail" placeholder="you@example.com">
+              <div class="form-text text-danger" id="msgsignupemail"></div>
+            </div>
+            <div class="mb-3">
+              <label for="txtpwd" class="form-label">Password</label>
+              <input type="password" class="form-control" id="txtpwd" name="txtpwd"
+                placeholder="At least 6 characters">
+              <div class="form-text text-danger" id="msgsignuppwd"></div>
+            </div>
+            <div class="mb-3">
+              <label for="utype" class="form-label">Select your Role</label>
+              <select class="form-select" name="utype" id="utype">
+                <option value="none" selected>Select your role</option>
+                <option value="INFLUENCER">Influencer</option>
+                <option value="BRAND">Brand</option>
+              </select>
+              <div class="form-text text-danger" id="msgsignupcontype"></div>
+            </div>
+            <div class="text-center">
+              <button type="button" id="sgnup" class="btn btn-dark w-100">Sign Up</button>
+            </div>
+          </form>
         </div>
       </div>
     </div>
+  </div>
 
+  <!-- Login modal -->
+  <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <div>
+            <div class="role-tag mb-1">Welcome back</div>
+            <h1 class="modal-title fs-5" id="loginModalLabel">Login</h1>
+          </div>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div id="msglogin"></div>
+          <form>
+            <div class="mb-3">
+              <label for="txtemaill" class="form-label">Email address</label>
+              <input type="email" name="txtemaill" class="form-control" id="txtemaill"
+                placeholder="you@example.com">
+            </div>
+            <div class="mb-3">
+              <label for="txtpwdd" class="form-label">Password</label>
+              <input type="password" class="form-control" id="txtpwdd" name="txtpwdd" placeholder="Password">
+            </div>
+            <div class="text-center">
+              <button type="button" id="login" class="btn btn-dark w-100">Login</button>
+              <h6 class="mt-3 fw-normal">
+                Don't have an account?
+                <a href="#" data-bs-toggle="modal" data-bs-target="#signupModal" class="removeunderline">Sign up
+                  here</a>
+              </h6>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+    integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+  <script src="js/common.js"></script>
+  <script>
+    $(document).ready(function () {
+      function validateEmail(email) {
+        var emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        return emailPattern.test(email);
+      }
+      function validatePassword(password) {
+        return password.length >= 6;
+      }
+
+      $("#txtemail").on("input", function () {
+        $("#msgsignupemail").text(validateEmail($(this).val()) ? "" : "Invalid email address");
+      });
+      $("#txtpwd").on("input", function () {
+        $("#msgsignuppwd").text(validatePassword($(this).val()) ? "" : "Password must be at least 6 characters long");
+      });
+      $("#utype").on("change", function () {
+        $("#msgsignupcontype").text($(this).val() === "none" ? "Please select a role" : "");
+      });
+
+      $("#sgnup").click(function () {
+        const email = $("#txtemail").val();
+        const password = $("#txtpwd").val();
+        const userType = $("#utype").val();
+
+        if (!validateEmail(email)) return $("#msgsignupemail").text("Invalid email address");
+        if (!validatePassword(password)) return $("#msgsignuppwd").text("Password must be at least 6 characters long");
+        if (userType === "none") return $("#msgsignupcontype").text("Please select a role");
+
+        withButtonSpinner("#sgnup", "Signing up...", function () {
+          return $.ajax({
+            type: "POST",
+            url: "/api/auth/signup",
+            contentType: "application/json",
+            data: JSON.stringify({ email: email, password: password, userType: userType }),
+          });
+        }).done(function (resp) {
+          showAlert("#signupAlert", resp.message, "success");
+        }).fail(function (xhr) {
+          showAlert("#signupAlert", xhr.responseJSON ? xhr.responseJSON.message : "Signup failed.", "danger");
+        });
+      });
+
+      $("#login").click(function () {
+        const email = $("#txtemaill").val();
+        const password = $("#txtpwdd").val();
+
+        withButtonSpinner("#login", "Logging in...", function () {
+          return $.ajax({
+            type: "POST",
+            url: "/api/auth/login",
+            contentType: "application/json",
+            data: JSON.stringify({ email: email, password: password }),
+          });
+        }).done(function (resp) {
+          if (resp.userType === "INFLUENCER") {
+            window.location.href = "/infldash";
+          } else if (resp.userType === "BRAND") {
+            window.location.href = "/branddash";
+          } else if (resp.userType === "ADMIN") {
+            window.location.href = "/admindash";
+          }
+        }).fail(function (xhr) {
+          showAlert("#msglogin", xhr.responseJSON ? xhr.responseJSON.message : "Login failed.", "danger");
+        });
+      });
+    });
+  </script>
 </body>
 
 </html>

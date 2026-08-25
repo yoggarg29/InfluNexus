@@ -3,228 +3,206 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>INFLUENCER DASHBOARD</title>
+    <title>Influencer Dashboard — InfluNexus</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-    <script>
-      function logout(){
-        localStorage.removeItem("activeuserinfl");
-        location.href="index.html";
-      }
-    </script>
-     <script>
-      $(document).ready(function(){
-
-       let activeinfl=localStorage.getItem("activeuserinfl");
-       $("#txtemail").val(activeinfl).prop("readonly",true)
-       $("#txtemails").val(activeinfl).prop("readonly",true)
-        if(activeinfl!=null){
-          $("#welemaill").html("WELCOME : " + activeinfl)
-        }
-        $("#btnpost").click(function(){
-          let obj={
-            type:"get",
-            url:"/postbooking",
-            data:{
-                txtemail:$("#txtemail").val(),
-                txttitle:$("#txtevtitle").val(),
-                doe:$("#doe").val(),
-                starttime:$("#starttime").val(),
-                txtplace:$("#txtplace").val(),
-                txtloc:$("#txtloc").val()
-                
-
-            }
-        }
-        $.ajax(obj).done(function (resp) {
-          $("#msgbook").html(resp);
-      }).fail(function (err) {
-          alert(err.statusText);
-      })
-        })
-        $("#btnupdp").click(function(){
-          let obj={
-            type:"get",
-            url:"/updatepass",
-            data:{
-                txtemails:$("#txtemails").val(),
-                txtpwdold:$("#txtpwdold").val(),
-                txtpwdnew:$("#txtpwdnew").val(),
-                txtpwdcon:$("#txtpwdcon").val()
-            }
-        }
-        $.ajax(obj).done(function (resp) {
-          $("#msgupd").html(resp);
-      }).fail(function (err) {
-          alert(err.statusText);
-      })
-        })
-      })
-     </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
-  <nav style="box-shadow: 0px 0px 1px 0px black;" class="navbar  navbar-expand-lg ">
-    <div class="container-fluid">
-      <nav class="navbar ">
-        <div class="container">
-          <a class="navbar-brand" href="#">
-            <img src="pics/logo3.jpg" alt="Bootstrap" style="border-radius: 0%;" width="70" height="60">
-          </a>
-        </div>
-      </nav>
-      <a class="navbar-brand" href="#">
-        <font style="font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; font-size:25px;font-weight:bolder">
-          InfluNexus
-        </font>
+<body class="role-influencer">
+  <div class="role-strip"></div>
+  <nav class="navbar navbar-expand-lg">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center gap-2" href="/infldash">
+        <img src="pics/logo3.jpg" alt="InfluNexus logo" width="42" height="42" style="object-fit:cover;">
+        <span class="navbar-brand-text">InfluNexus</span>
       </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav  ">
-          <form class="d-flex" role="search">
-            <a href="#" data-bs-toggle="modal" data-bs-target="#settingmodal" class="btn btn-primary">Settings</a>
-            <input type="button" class="btn btn-primary ms-3" id="btnlogout" onclick="logout();" value="Logout">
-          </form>
-        </ul>
+      <div class="d-flex align-items-center gap-2 ms-auto">
+        <a href="#" data-bs-toggle="modal" data-bs-target="#settingmodal" class="btn btn-outline-light btn-sm">Settings</a>
+        <input type="button" class="btn btn-role btn-sm" id="btnlogout" value="Logout">
       </div>
     </div>
-  </nav><br>
-  
-<center>
-    <h1>INFLUENCER DASHBOARD</h1> <br>
-</center>
+  </nav>
 
-<center>
-  <h3 style="color:red"><span id="welemaill"></span></h3> 
-</center>
-<br>
-<div class="container">
-  <div class="row justify-content-center">
-    <div class="col-md-3">
-      <div class="card h-100">
-        <img src="pics/profile.jpg" class="card-img-top" alt="Profile Image"/>
-        <div class="card-body">
-          <center>
-            <h5 class="card-title">PROFILE</h5>
-            <a href="/inflprofile" target="_blank" class="btn btn-primary">Go To Profile</a>
-          </center>
+  <div class="container">
+    <div class="pt-5 pb-4">
+      <div class="role-tag mb-2">Influencer space</div>
+      <h1 class="mb-1">Welcome back<span id="welemaill"></span></h1>
+      <p class="lede">Manage your profile and the events brands can find you for.</p>
+    </div>
+
+    <div class="row g-4 pb-5">
+      <div class="col-md-4">
+        <div class="card tile h-100">
+          <div class="card-body p-4">
+            <div class="icon-badge"><i class="fa-solid fa-id-card"></i></div>
+            <h5 class="card-title">Profile</h5>
+            <p class="card-text">Keep your niche, contact details, and socials current so brands can find and vet you.</p>
+            <a href="/inflprofile" class="btn btn-primary btn-sm mt-2">Go to profile</a>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="col-md-3">
-      <div class="card h-100">
-        <img src="pics/booking.webp" class="card-img-top" alt="Bookings Image"/><br><br>
-        <div class="card-body">
-          <center>
-            <h5 class="card-title">BOOKINGS</h5>
-            <a href="#" data-bs-toggle="modal" data-bs-target="#bookingmodal" class="btn btn-primary">Go To Bookings</a>
-          </center>
+      <div class="col-md-4">
+        <div class="card tile h-100">
+          <div class="card-body p-4">
+            <div class="icon-badge"><i class="fa-solid fa-calendar-plus"></i></div>
+            <h5 class="card-title">Bookings</h5>
+            <p class="card-text">Post a new event — a date, place, and time — that brands can discover and reach out about.</p>
+            <a href="#" data-bs-toggle="modal" data-bs-target="#bookingmodal" class="btn btn-primary btn-sm mt-2">Post a booking</a>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="col-md-3">
-      <div class="card h-100"><br>
-        <img src="pics/evma.png" class="card-img-top" alt="Events Manager Image"/><br><br>
-        <div class="card-body">
-          <center>
-            <h5 class="card-title">EVENTS MANAGER</h5>
-            <a href="/eventmanager" target="_blank" class="btn btn-primary">Manage Events</a>
-          </center>
+      <div class="col-md-4">
+        <div class="card tile h-100">
+          <div class="card-body p-4">
+            <div class="icon-badge"><i class="fa-solid fa-list-check"></i></div>
+            <h5 class="card-title">Events Manager</h5>
+            <p class="card-text">Review everything you've posted so far, and remove events that are no longer open.</p>
+            <a href="/eventmanager" class="btn btn-primary btn-sm mt-2">Manage events</a>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
 
-<!-- Booking Modal -->
 <div class="modal fade" id="bookingmodal" tabindex="-1" aria-labelledby="bookingmodalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="bookingmodalLabel">Post Events</h1>
-        &nbsp;  <span id="msgbook">*</span>
+        <div>
+          <div class="role-tag mb-1">New booking</div>
+          <h1 class="modal-title fs-5" id="bookingmodalLabel">Post Event</h1>
+        </div>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
+        <div id="msgbook"></div>
         <form>
           <div class="mb-3">
-            <label for="txtemail" class="form-label">Email id</label>
-            <input type="email" class="form-control" id="txtemail" placeholder="Enter email" name="txtemail" aria-describedby="emailHelp">
-          </div>
-          <div class="mb-3">
             <label for="txtevtitle" class="form-label">Event Title</label>
-            <input type="text" class="form-control" placeholder="Enter event title" id="txtevtitle" name="txttitle">
+            <input type="text" class="form-control" placeholder="Enter event title" id="txtevtitle">
           </div>
           <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-6 mb-3">
               <label for="doe" class="form-label">Date of Event</label>
-              <input type="date" class="form-control" id="doe" name="doe">
+              <input type="date" class="form-control" id="doe">
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6 mb-3">
               <label for="starttime" class="form-label">Start Time</label>
-              <input type="time" class="form-control" id="starttime" name="starttime">
+              <input type="time" class="form-control" id="starttime">
             </div>
           </div>
           <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-6 mb-3">
               <label for="txtplace" class="form-label">City/Place</label>
-              <input type="text" class="form-control" placeholder="Enter city or place" name="txtplace" id="txtplace">
+              <input type="text" class="form-control" placeholder="Enter city or place" id="txtplace">
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6 mb-3">
               <label for="txtloc" class="form-label">Venue</label>
-              <input type="text" class="form-control" placeholder="Enter Event Location" id="txtloc" name="txtloc">
+              <input type="text" class="form-control" placeholder="Enter event location" id="txtloc">
             </div>
           </div>
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-outline-role" data-bs-dismiss="modal">Cancel</button>
         <button type="button" id="btnpost" class="btn btn-primary">Post Booking</button>
       </div>
     </div>
   </div>
 </div>
 
-<!-- Settings Modal -->
 <div class="modal fade" id="settingmodal" tabindex="-1" aria-labelledby="settingmodalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="settingmodalLabel">Settings</h1>
-        &nbsp;  <span id="msgupd">*</span>
+        <div>
+          <div class="role-tag mb-1">Account</div>
+          <h1 class="modal-title fs-5" id="settingmodalLabel">Change Password</h1>
+        </div>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
+        <div id="msgupd"></div>
         <form>
           <div class="mb-3">
-            <label for="txtemails" class="form-label">Email id</label>
-            <input type="email" class="form-control" id="txtemails" name="txtemails" placeholder="Enter email" aria-describedby="emailHelp">
-          </div>
-          <div class="mb-3">
             <label for="txtpwdold" class="form-label">Old Password</label>
-            <input type="password" class="form-control" placeholder="Enter old password" id="txtpwdold" name="txtpwdold">
+            <input type="password" class="form-control" placeholder="Enter old password" id="txtpwdold">
           </div>
           <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-6 mb-3">
               <label for="txtpwdnew" class="form-label">New Password</label>
-              <input type="password" class="form-control" placeholder="Enter new password" id="txtpwdnew" name="txtpwdnew">
+              <input type="password" class="form-control" placeholder="Enter new password" id="txtpwdnew">
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6 mb-3">
               <label for="txtpwdcon" class="form-label">Confirm Password</label>
-              <input type="password" class="form-control" placeholder="Re-enter new password" id="txtpwdcon" name="txtpwdcon">
+              <input type="password" class="form-control" placeholder="Re-enter new password" id="txtpwdcon">
             </div>
           </div>
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-outline-role" data-bs-dismiss="modal">Cancel</button>
         <button type="button" id="btnupdp" class="btn btn-primary">Update</button>
       </div>
     </div>
   </div>
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+<script src="js/common.js"></script>
+<script>
+  $(document).ready(function () {
+    requireSession(function (user) {
+      $("#welemaill").text(", " + user.email);
+    });
+
+    $("#btnlogout").click(logout);
+
+    $("#btnpost").click(function () {
+      const payload = {
+        title: $("#txtevtitle").val(),
+        eventDate: $("#doe").val(),
+        startTime: $("#starttime").val(),
+        place: $("#txtplace").val(),
+        location: $("#txtloc").val(),
+      };
+      withButtonSpinner("#btnpost", "Posting...", function () {
+        return $.ajax({
+          type: "POST",
+          url: "/api/influencer/events",
+          contentType: "application/json",
+          data: JSON.stringify(payload),
+        });
+      }).done(function (resp) {
+        showAlert("#msgbook", resp.message, "success");
+      }).fail(function (xhr) {
+        showAlert("#msgbook", xhr.responseJSON ? xhr.responseJSON.message : "Could not post event.", "danger");
+      });
+    });
+
+    $("#btnupdp").click(function () {
+      const payload = {
+        oldPassword: $("#txtpwdold").val(),
+        newPassword: $("#txtpwdnew").val(),
+        confirmPassword: $("#txtpwdcon").val(),
+      };
+      withButtonSpinner("#btnupdp", "Updating...", function () {
+        return $.ajax({
+          type: "POST",
+          url: "/api/auth/change-password",
+          contentType: "application/json",
+          data: JSON.stringify(payload),
+        });
+      }).done(function (resp) {
+        showAlert("#msgupd", resp.message, "success");
+      }).fail(function (xhr) {
+        showAlert("#msgupd", xhr.responseJSON ? xhr.responseJSON.message : "Could not update password.", "danger");
+      });
+    });
+  });
+</script>
 </body>
 </html>

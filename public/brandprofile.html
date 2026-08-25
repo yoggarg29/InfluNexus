@@ -4,114 +4,126 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Brand profile</title>
+    <title>Brand Profile — InfluNexus</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-        crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
-        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-        <script>
-            $(document).ready(function(){
-              let activebrand=localStorage.getItem("activeuserbrand");
-              $("#txtbemail").val(activebrand).prop("readonly",true)
-           
-            $("#btnbsearch").click(function(){
-              let obj={
-                  type:"get",
-                  url:"/findbuserdetails",
-                  data:{
-                      txtbemail:$("#txtbemail").val()
-                  }
-              }
-              $.ajax(obj).done(function(jsonAry)
-              {
-                  if(jsonAry.length==0)
-                  {
-                      alert("Invalid ID");
-                      return;
-                  }
-                  //alert(JSON.stringify(jsonAry));
-                  $("#txtbname").val(jsonAry[0].bname);
-                
-                  $("#txtbmno").val(jsonAry[0].bmno);
-                  $("#txtbind").val(jsonAry[0].bind);
-                  $("#txtbadr").val(jsonAry[0].badr);
-                  $("#txtbcity").val(jsonAry[0].bcity);
-                  $("#bstate").val(jsonAry[0].bstate);
-                  $("#txtbpcode").val(jsonAry[0].bpcode);
-                 
-        
-              }).fail(function(err)
-              {
-                  alert(err.statusText);
-              })
-        
-          }); })
-          </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 
-<body> <nav style="box-shadow: 0px 0px 1px 0px black;" class="navbar  navbar-expand-lg">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#">
-        <img src="pics/logo3.jpg" alt="Bootstrap" style="border-radius: 0%;" width="70" height="60">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <font style="font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; font-size:25px;font-weight:bolder">InfluNexus</font>
+<body class="role-brand">
+  <div class="role-strip"></div>
+  <nav class="navbar navbar-expand-lg">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center gap-2" href="/branddash">
+        <img src="pics/logo3.jpg" alt="InfluNexus logo" width="42" height="42" style="object-fit:cover;">
+        <span class="navbar-brand-text">InfluNexus</span>
       </a>
     </div>
-  </nav><br>
-    <center>
-        <h2>
-            BRAND PROFILE
-        </h2>
-    </center><br> <br> <div class="container">
-    <form  class="row g-3">   
-        <div class="col-md-6">
-            <input type="email" placeholder="Enter Email"  class="form-control"  name="txtbemail" id="txtbemail"> </div>
-          <div class="col-md-6">
-            <button type="button" id="btnbsearch" name="btnbserach" class="btn btn-dark">Search</button>
-          </div>
-          <div class="col-md-6">
-            <label for="txtbname" class="form-label">Name </label>
-            <input type="text"  placeholder=" Enter Name" class="form-control" id="txtbname" name="txtbname">
-          </div> <div class="col-md-6">
-            <label for="txtbmno" class="form-label">Phone Number</label>
-            <input type="text" placeholder=" Enter Phone Number" class="form-control" id="txtbmno" name="txtbmno">
+  </nav>
 
-            
-          </div>
-          <div class="col-md-6"> 
-            <label for="txtbind" class="form-label">Individual/Organisation</label>
-            <input type="text" class="form-control" id="txtbind" name="txtbind" placeholder="Enter name of individual/organisation">
-          </div>
-          <div class="col-md-6"> 
-            <label for="txtbadr" class="form-label">Address</label>
-            <input type="text" class="form-control" id="txtbadr" name="txtbadr" placeholder="Enter Your Adress">
-          </div>
-          <div class="col-md-4">
-            <label for="txtbcity" class="form-label">City</label>
-            <input type="text" class="form-control" name="txtbcity" id="txtbcity">
-          </div>
-          <div class="col-md-4">
-            <label for="bstate"  class="form-label">State</label>
-            <select id="bstate" name="bstate" class="form-select">
-              <option value="none" selected> Select</option>
-              <option value="punjab">Punjab</option>
-              <option value="mumbai">Mumbai</option>
-              <option value="delhi">Delhi</option>
-              
-            </select>
-          </div>
-          <div class="col-md-4">
-            <label for="txtbpcode" class="form-label">Pin Code</label>
-            <input type="text" class="form-control" id="txtbpcode" name="txtbpcode"> 
-          </div>
-          <center>
-            <div >
-              <button type="submit" id="btnbsubmit" class="btn btn-primary" formaction="bprofilesave">Save</button>
-                <button type="submit" id="btnbupdate" class="btn btn-danger" formaction="bprofileupdate">Update</button>
-              </div></center> <br>
-</form></div>
+  <div class="container">
+    <div class="pt-5 pb-4">
+      <div class="role-tag mb-2">Brand space</div>
+      <h1 class="mb-1">Brand Profile</h1>
+      <p class="lede">Influencers see this when you reach out — keep it clear and current.</p>
+    </div>
+
+    <div class="card mb-5">
+      <div class="card-body p-4 p-md-5">
+        <div id="profileAlert"></div>
+        <form class="row g-3">
+            <div class="col-md-8">
+              <label for="txtbemail" class="form-label">Email id</label>
+              <input type="email" readonly class="form-control" id="txtbemail">
+            </div>
+            <div class="col-12"><hr class="my-2" style="border-color:var(--border);"></div>
+              <div class="col-md-6">
+                <label for="txtbname" class="form-label">Brand Name</label>
+                <input type="text" placeholder="Enter brand name" class="form-control" id="txtbname">
+              </div>
+              <div class="col-md-6">
+                <label for="txtbmno" class="form-label">Phone Number</label>
+                <input type="text" placeholder="Enter phone number" class="form-control" id="txtbmno">
+              </div>
+              <div class="col-md-6">
+                <label for="txtbind" class="form-label">Individual / Organisation</label>
+                <input type="text" class="form-control" id="txtbind" placeholder="Enter name of individual/organisation">
+              </div>
+              <div class="col-md-6">
+                <label for="txtbadr" class="form-label">Address</label>
+                <input type="text" class="form-control" id="txtbadr" placeholder="Enter your address">
+              </div>
+              <div class="col-md-4">
+                <label for="txtbcity" class="form-label">City</label>
+                <input type="text" class="form-control" id="txtbcity">
+              </div>
+              <div class="col-md-4">
+                <label for="bstate" class="form-label">State</label>
+                <select id="bstate" class="form-select">
+                  <option value="punjab">Punjab</option>
+                  <option value="mumbai">Mumbai</option>
+                  <option value="delhi">Delhi</option>
+                </select>
+              </div>
+              <div class="col-md-4">
+                <label for="txtbpcode" class="form-label">Pin Code</label>
+                <input type="text" class="form-control" id="txtbpcode">
+              </div>
+              <div class="col-12 pt-2">
+                <button type="button" id="btnbsubmit" class="btn btn-primary px-4">Save Profile</button>
+              </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+<script src="js/common.js"></script>
+<script>
+  $(document).ready(function () {
+    requireSession(function (user) {
+      $("#txtbemail").val(user.email);
+      $.get("/api/brand/profile").done(function (resp) {
+        const p = resp.profile;
+        if (!p) return;
+        $("#txtbname").val(p.brand_name);
+        $("#txtbmno").val(p.phone);
+        $("#txtbind").val(p.org_type);
+        $("#txtbadr").val(p.address);
+        $("#txtbcity").val(p.city);
+        $("#bstate").val(p.state);
+        $("#txtbpcode").val(p.pincode);
+      });
+    });
+
+    $("#btnbsubmit").click(function () {
+      const payload = {
+        brandName: $("#txtbname").val(),
+        phone: $("#txtbmno").val(),
+        orgType: $("#txtbind").val(),
+        address: $("#txtbadr").val(),
+        city: $("#txtbcity").val(),
+        state: $("#bstate").val(),
+        pincode: $("#txtbpcode").val(),
+      };
+      withButtonSpinner("#btnbsubmit", "Saving...", function () {
+        return $.ajax({
+          type: "POST",
+          url: "/api/brand/profile",
+          contentType: "application/json",
+          data: JSON.stringify(payload),
+        });
+      }).done(function (resp) {
+        showAlert("#profileAlert", resp.message, "success");
+      }).fail(function (xhr) {
+        showAlert("#profileAlert", xhr.responseJSON ? xhr.responseJSON.message : "Could not save profile.", "danger");
+      });
+    });
+  });
+</script>
 </body>
 
 </html>
