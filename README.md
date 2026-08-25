@@ -109,6 +109,3 @@ InfluNexus/
 | GET | `/api/admin/influencers` | List all influencer profiles | ADMIN |
 | DELETE | `/api/admin/users/:email` | Delete a user | ADMIN |
 | PATCH | `/api/admin/users/:email/status` | Block/unblock a user | ADMIN |
-
-For the reasoning behind these design decisions (and how to explain them
-in an interview), see **[INTERVIEW_GUIDE.md](./INTERVIEW_GUIDE.md)**.
